@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+}
+
+/* Material Icons muda as fontes para Roboto*/
+*{
+    font-family: Roboto, 'Helvetica', sans-serif; 
+}
+
+.spacer-full {
+    flex: 1 1 auto;
+}
+
+.spacer-short {
+    flex: 0.05 1 0;
+}

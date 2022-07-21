@@ -1,0 +1,10 @@
+
+.logo{
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+.logo:hover{
+    opacity: 80%;
+}
