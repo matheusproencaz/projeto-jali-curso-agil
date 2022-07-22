@@ -3,6 +3,8 @@ package com.mpz.EsseEuJaLi.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -41,7 +43,7 @@ public class UserResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> insertUser(@RequestBody UserLoginDTO objDTO){
+	public ResponseEntity<Void> insertUser(@Valid @RequestBody UserLoginDTO objDTO){
 		
 		User obj = userService.fromDTO(objDTO);
 		userService.insertUser(obj);

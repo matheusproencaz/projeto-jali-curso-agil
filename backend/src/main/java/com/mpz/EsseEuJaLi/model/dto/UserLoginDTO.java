@@ -2,12 +2,22 @@ package com.mpz.EsseEuJaLi.model.dto;
 
 import java.io.Serializable;
 
-import com.mpz.EsseEuJaLi.model.User;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
+import com.mpz.EsseEuJaLi.model.User;
+import com.mpz.EsseEuJaLi.services.validations.UserInsert;
+import com.mpz.EsseEuJaLi.services.validations.UserUpdate;
+
+@UserInsert
 public class UserLoginDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
+	@NotBlank(message = "Preenchimento Obrigatório")
 	private String name;
+	
+	@NotBlank(message = "Preenchimento Obrigatório")
+	@Size(min = 8, max = 120, message = "O tamanho da senha deve ser maior que 8 caracteres")
 	private String password;
 	
 	public UserLoginDTO() {

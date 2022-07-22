@@ -3,6 +3,7 @@ package com.mpz.EsseEuJaLi.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mpz.EsseEuJaLi.model.Book;
 import com.mpz.EsseEuJaLi.repositories.BookRepository;
+import com.mpz.EsseEuJaLi.services.exceptions.DataIntegrityException;
 import com.mpz.EsseEuJaLi.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -51,6 +53,11 @@ public class BookService {
 	@Transactional
 	public void deleteBook(Long id) {
 		Book obj = findBook(id);
-		bookRepository.delete(obj);
+		
+		try {
+			bookRepository.delete(obj);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível excluir um livro que possui usuários.");
+		}
 	}
 }
