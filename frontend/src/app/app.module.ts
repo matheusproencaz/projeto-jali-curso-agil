@@ -16,13 +16,18 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SettingsComponent } from './pages/settingsPage/settings.component';
+import { Error404Component } from './components/error404/error404.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +36,9 @@ import { LoginComponent } from './components/login/login.component';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
+    SettingsComponent,
+    Error404Component,
+    HomeComponent,
     
   ],
   imports: [
@@ -49,6 +57,8 @@ import { LoginComponent } from './components/login/login.component';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinnerModule,
+    MatCheckboxModule,
 
   ],
   providers: [],

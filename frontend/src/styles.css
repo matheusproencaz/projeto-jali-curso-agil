@@ -16,3 +16,7 @@ body {
 .spacer-short {
     flex: 0.05 1 0;
 }
+
+.icon{
+    font-size: 25px;
+}

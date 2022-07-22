@@ -8,3 +8,9 @@
 .logo:hover{
     opacity: 80%;
 }
+
+.menuItem{
+    background-color: lightgray;
+    padding: 5px;
+    border-radius: 50%;
+}

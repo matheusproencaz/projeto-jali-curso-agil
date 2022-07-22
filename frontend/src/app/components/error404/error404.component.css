@@ -1,0 +1,26 @@
+.error h1{
+    font-size: 64px;
+    font-weight: 900;
+}
+
+.error h2{
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1;
+    top: 26vh;
+    position: absolute;
+    padding: 50px;
+}
+
+.error img{
+    position: absolute;
+    top: -10vh;
+    opacity: 50%;
+}
