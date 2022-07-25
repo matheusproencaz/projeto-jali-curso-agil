@@ -37,10 +37,17 @@ public class UserResource {
 	}
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping()
 	public ResponseEntity<List<User>> findAll(){
 		return ResponseEntity.ok(userService.findUsers());
 	}
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	@GetMapping("/admin")
+	public ResponseEntity<Boolean> isAdmin(){
+		return ResponseEntity.ok(true);
+	}
+	
 	
 	@PostMapping
 	public ResponseEntity<Void> insertUser(@Valid @RequestBody UserLoginDTO objDTO){

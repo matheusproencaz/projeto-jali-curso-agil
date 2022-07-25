@@ -5,7 +5,7 @@
         <p> {{user | json}} </p>
         <form novalidate #loginForm="ngForm" fxLayout="column" (ngSubmit)="onSubmit()" fxLayoutGap="2rem">
             <mat-form-field width="100%">
-                <input matInput type="text" placeholder="Username" [(ngModel)]="user.username" name="username"
+                <input matInput type="text" placeholder="Username" [(ngModel)]="user.name" name="username"
                     #username="ngModel" required>
                 <mat-error *ngIf="username.errors">Username error label</mat-error>
             </mat-form-field>
@@ -15,12 +15,9 @@
                     #password="ngModel" required>
                 <mat-error *ngIf="username.errors">Username error label</mat-error>
             </mat-form-field>
-            <div>
-                <mat-checkbox [(ngModel)]="user.remember" name="remember">Remember Me</mat-checkbox>
-            </div>
             <div fxFlex fxLayout="row" fxLayoutAlign="space-around center" class="actions">
-                <button mat-flat-button color="primary">Entrar</button>
-                <button mat-button color="primary">Registrar-se</button>
+                <button mat-flat-button color="primary" type="submit">Entrar</button>
+                <button mat-button color="primary" type="button" (click)="registry()">Registrar-se</button>
             </div>
         </form>
     </div>

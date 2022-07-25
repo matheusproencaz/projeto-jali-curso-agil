@@ -62,6 +62,7 @@ public class User implements Serializable{
 		this.id = id;
 		this.name = name;
 		this.password = password;
+		this.points = 0;
 		addRole(Role.USER); // Todo usuário cadastrado é usuário.
 	}
 	

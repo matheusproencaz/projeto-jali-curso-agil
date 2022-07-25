@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders }  from '@angular/common/http';
-import Ranker from 'src/app/shared/Ranker';
 import { Observable } from 'rxjs';
-import { baseURL } from 'src/app/shared/baseurl';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +11,8 @@ export class RankingService {
 
   constructor(private http: HttpClient) { }
 
-  getRanking(): Observable<any>{
-    return this.http.get<any> (`${baseURL}/ranking`);
+  getRanking(page: number | any): Observable<any>{
+    return this.http.get<any> (`${environment.apiUrl}/ranking?page=${page}`);
   }
 
 }

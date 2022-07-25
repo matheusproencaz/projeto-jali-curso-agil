@@ -9,10 +9,16 @@
             <span fxHide.xs> Home </span>
         </a>
 
-        <a mat-button aria-label="Button to Rankings" href="#">
+        <a mat-button aria-label="Button to Rankings" routerLink="/ranking" href="#">
             <mat-icon>insert_chart_outlined</mat-icon>
             <span fxHide.xs> Ranking </span>
         </a>
+
+        <a *ngIf="admin" mat-button aria-label="Button to Rankings" href="#">
+            <mat-icon>security</mat-icon>
+            <span fxHide.xs> Admin </span>
+        </a>
+
         <span class="spacer-full"></span>
         <button mat-icon-button  [matMenuTriggerFor]="menu" aria-label="Button to Settings and Logout" >
             <mat-icon>person</mat-icon>

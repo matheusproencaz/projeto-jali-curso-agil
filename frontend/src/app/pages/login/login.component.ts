@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/LoginService/login.service';
+import User from 'src/app/shared/User';
 
 @Component({
   selector: 'app-login',
@@ -7,18 +10,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  user = {
-    username: '',
+  errors: string[] | any = [];
+  
+  user: User = {
+    name: '',
     password: '',
-    remember: false,
   }
-
-  constructor() { }
+  
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(){
-    console.log("User: ", this.user);
+    this.loginService.login(this.user)
+    .subscribe(
+      success => {
+        if(success){
+          this.router.navigate(['/home'])
+        }
+      });
+  }
+
+  registry(){
+    this.loginService.registry(this.user)
+    .subscribe(res => {
+      if(res){
+        alert("Usuário Cadastrado! Já pode logar!");
+      }});
   }
 }

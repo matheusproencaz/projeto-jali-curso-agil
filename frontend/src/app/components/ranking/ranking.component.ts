@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { RankingService } from 'src/app/services/RankingService/ranking.service';
 import Ranker from 'src/app/shared/Ranker';
 
@@ -9,13 +10,29 @@ import Ranker from 'src/app/shared/Ranker';
 })
 export class RankingComponent implements OnInit {
 
-  ranking: Ranker[] = [];
+  ranking: Array<Ranker> = [];
+  
+  numberPage: number;
+  totalPages: number;
+  pageIndex: number = 0;
 
   constructor(private rankingService: RankingService) { }
 
   ngOnInit(): void {
-    this.rankingService.getRanking()
-      .subscribe((ranking) => this.ranking = ranking.content);
+    this.getRanking(0);
   }
 
+  getRanking(page: number){
+    this.rankingService.getRanking(page)
+    .subscribe((res) => {
+      this.numberPage = res.number;
+      this.totalPages = res.totalPages;
+      this.ranking = res.content;
+    });
+  }
+
+  getPaginatorData(event: PageEvent){
+    this.pageIndex = event.pageIndex;
+    this.getRanking(this.pageIndex);
+  }
 }

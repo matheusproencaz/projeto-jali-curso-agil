@@ -41,6 +41,20 @@ public class DBService {
 		User user2 = new User(null, "Robson", passwordEncoder.encode("123"));
 		User user3 = new User(null, "Roger", passwordEncoder.encode("123"));
 		
+		// Ver Paginação
+		User user4 = new User(null, "user4", passwordEncoder.encode("123"));
+		User user5 = new User(null, "user5", passwordEncoder.encode("123"));
+		User user6 = new User(null, "user6", passwordEncoder.encode("123"));
+		User user7 = new User(null, "user7", passwordEncoder.encode("123"));
+		User user8 = new User(null, "user8", passwordEncoder.encode("123"));
+		User user9 = new User(null, "user9", passwordEncoder.encode("123"));
+		User user10 = new User(null, "user10", passwordEncoder.encode("123"));
+		User user11 = new User(null, "user11", passwordEncoder.encode("123"));
+		User user12 = new User(null, "user12", passwordEncoder.encode("123"));
+		User user13 = new User(null, "user13", passwordEncoder.encode("123"));
+		User user14 = new User(null, "user14", passwordEncoder.encode("123"));
+		User user15 = new User(null, "user15", passwordEncoder.encode("123"));
+		
 		Trophy trof1 = new Trophy(null, "Leitor de Ação!", Genre.Acao);
 		
 		Book book1 = new Book(null, "Livro 1", 500, Genre.Acao, "https://www.redeicm.org.br/carmo/wp-content/uploads/sites/5/2019/01/Livro.jpg");
@@ -74,6 +88,6 @@ public class DBService {
 		
 		bookRepository.saveAll(Arrays.asList(book1, book2, book3, book4, book5));
 		trophyRepository.saveAll(Arrays.asList(trof1));
-		userRepository.saveAll(Arrays.asList(user1, user2, user3, admin));
+		userRepository.saveAll(Arrays.asList(user1, user2, user3, admin, user4, user5, user6, user7, user8, user9, user10, user11, user12, user13, user14, user15));
 	}
 }

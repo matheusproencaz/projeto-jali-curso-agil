@@ -1,4 +1,4 @@
-export default interface Ranker{
+export default class Ranker{
     name: string;
     points: number;
 }

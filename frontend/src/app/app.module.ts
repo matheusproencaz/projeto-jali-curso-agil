@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RankingComponent } from './components/ranking/ranking.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // Material UI
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -18,6 +18,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -28,6 +30,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { SettingsComponent } from './pages/settingsPage/settings.component';
 import { Error404Component } from './components/error404/error404.component';
 import { HomeComponent } from './pages/home/home.component';
+import { TokenInterceptorService } from './interceptors/TokenInterceptor/token-interceptor.service';
+import { AdminComponent } from './pages/admin/admin.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +44,8 @@ import { HomeComponent } from './pages/home/home.component';
     SettingsComponent,
     Error404Component,
     HomeComponent,
+    AdminComponent,
+    LoadingComponent,
     
   ],
   imports: [
@@ -59,9 +66,17 @@ import { HomeComponent } from './pages/home/home.component';
     MatInputModule,
     MatProgressSpinnerModule,
     MatCheckboxModule,
-
+    MatGridListModule,
+    MatPaginatorModule,
+    
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

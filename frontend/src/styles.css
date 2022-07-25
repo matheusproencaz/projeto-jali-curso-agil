@@ -7,6 +7,7 @@ body {
 /* Material Icons muda as fontes para Roboto*/
 *{
     font-family: Roboto, 'Helvetica', sans-serif; 
+    --primary-color: #3F51B5;
 }
 
 .spacer-full {
@@ -19,4 +20,12 @@ body {
 
 .icon{
     font-size: 25px;
+}
+
+.primary-color{
+    color: var(--primary-color);
+}
+
+.loading h3{
+    font-size: 24px;
 }

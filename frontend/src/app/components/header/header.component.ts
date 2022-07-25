@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/LoginService/login.service';
 
 @Component({
   selector: 'app-header',
@@ -7,15 +8,21 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  loggedIn: boolean = true;
+  admin: boolean;
 
-  constructor() { }
+  constructor(private loginService: LoginService) { }
 
   ngOnInit(): void {
+      this.loginService
+        .adminRequest()
+        .subscribe(res => {
+          this.admin = res
+        })
   }
 
   logout(){
-    this.loggedIn = false;
+    this.admin = false;
+    this.loginService.logout();
   }
 
 }
