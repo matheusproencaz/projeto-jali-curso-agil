@@ -1,9 +1,7 @@
 package com.mpz.EsseEuJaLi.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,14 +40,14 @@ public class User implements Serializable{
 		name="marked_books",
 		joinColumns = @JoinColumn(name = "user_id"),
 		inverseJoinColumns = @JoinColumn(name = "book_id"))
-	private List<Book> books = new ArrayList<>();
+	private Set<Book> books = new HashSet<>();
 	
 	@ManyToMany
 	@JoinTable(
 		name="user_trophies",
 		joinColumns = @JoinColumn(name = "user_id"),
 		inverseJoinColumns = @JoinColumn(name = "trophy_id"))
-	private List<Trophy> trophies = new ArrayList<>();
+	private Set<Trophy> trophies = new HashSet<>();
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "ROLES")
@@ -94,7 +92,7 @@ public class User implements Serializable{
 		this.points = points;
 	}
 
-	public List<Book> getBooks() {
+	public Set<Book> getBooks() {
 		return books;
 	}
 	
@@ -106,11 +104,11 @@ public class User implements Serializable{
 		this.books.remove(book);
 	}
 	
-	public List<Trophy> getTrophies() {
+	public Set<Trophy> getTrophies() {
 		return trophies;
 	}
 		
-	public void addTrophy(Trophy trophy) {
+	public void addTrophyManually(Trophy trophy) {
 		this.trophies.add(trophy);
 	}
 	

@@ -2,13 +2,12 @@ package com.mpz.EsseEuJaLi.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +15,11 @@ import com.mpz.EsseEuJaLi.model.Book;
 import com.mpz.EsseEuJaLi.model.Trophy;
 import com.mpz.EsseEuJaLi.model.User;
 import com.mpz.EsseEuJaLi.model.dto.UserLoginDTO;
+import com.mpz.EsseEuJaLi.model.enums.Genre;
 import com.mpz.EsseEuJaLi.model.enums.Role;
 import com.mpz.EsseEuJaLi.repositories.UserRepository;
 import com.mpz.EsseEuJaLi.security.UserSS;
+import com.mpz.EsseEuJaLi.services.exceptions.AlreadyAdded;
 import com.mpz.EsseEuJaLi.services.exceptions.AuthorizationException;
 import com.mpz.EsseEuJaLi.services.exceptions.ObjectNotFoundException;
 
@@ -78,9 +79,14 @@ public class UserService {
 	public void addBook(Long idUser, Long idBook) {
 		User user = findUserById(idUser);
 		Book book = bookService.findBook(idBook);
-
+		
+		if(user.getBooks().contains(book)) {
+			throw new AlreadyAdded("Livro já adicionado ao usuário!");
+		}
 		user.addBooks(book);
+		
 		points(user);
+		addTrophyByReading(idUser);
 		user = userRepository.save(user);
 	}
 
@@ -101,7 +107,11 @@ public class UserService {
 		User user = findUserById(idUser);
 		Trophy trof = trophyService.findTrophy(idTrophy);
 
-		user.addTrophy(trof);
+		if(user.getTrophies().contains(trof)) {
+			throw new AlreadyAdded("Troféu já adicionado ao usuário!");
+		}
+		
+		user.addTrophyManually(trof);
 		user = userRepository.save(user);
 	}
 
@@ -134,5 +144,48 @@ public class UserService {
 		// https://stackoverflow.com/questions/7139382/java-rounding-up-to-an-int-using-math-ceil
 		int points =  (pages + 100 - 1)/100;
 		user.setPoints(points);
+	}
+	
+	
+	public void addTrophyByGenreBook(String nameTrophy, User user, Genre g) {
+		Trophy trophy = trophyService.findTrophyByName(nameTrophy);
+		if(trophy != null) {
+			user.addTrophyManually(trophy);
+		} else {
+			Trophy newTrophy = new Trophy(null, nameTrophy, g);
+			trophyService.insertTrophy(newTrophy);
+			user.addTrophyManually(newTrophy);
+		}
+	}
+	
+	public void addTrophyByReading(Long idUser) {
+		User user = findUserById(idUser);
+		Set<Book> books = user.getBooks();
+		
+		for(Genre g : Genre.values()) {
+			Set<Book> booksByGenre = books.stream().filter(b -> b.getGenre().equals(g))
+					   .collect(Collectors.toSet());
+			
+			if(booksByGenre.size() >= 1) {
+				String nameTrophy = "Troféu leitor novato de " + g.getDescription();
+				addTrophyByGenreBook(nameTrophy, user, g);
+			}
+			
+			if(booksByGenre.size() >= 5) {
+				String nameTrophy = "Troféu leitor médio de " + g.getDescription();
+				addTrophyByGenreBook(nameTrophy, user, g);
+			}
+			
+			if(booksByGenre.size() >= 10) {
+				String nameTrophy = "Troféu amante de livros de " + g.getDescription();
+				addTrophyByGenreBook(nameTrophy, user, g);
+			}
+			
+			if(booksByGenre.size() >= 15) {
+				String nameTrophy = "Troféu leitor viciado em " + g.getDescription();
+				addTrophyByGenreBook(nameTrophy, user, g);
+			}
+		}
+		userRepository.save(user);
 	}
 }

@@ -17,8 +17,8 @@ export class TokenInterceptorService implements HttpInterceptor{
     private loginService: LoginService,
     private errorHandler: ExceptionHandlerService,
   ) { 
-    this.token = this.loginService.getCurrentUser()!;
-  }
+      this.token = this.loginService.token;
+    }
 
   intercept(
     req: HttpRequest<any>,
@@ -30,7 +30,7 @@ export class TokenInterceptorService implements HttpInterceptor{
 
     let modifiedRequest = req.clone({
       setHeaders: {
-        'Authorization': `${this.token}`,
+        'Authorization': `${this.loginService.getToken()}`,
       }
     });
 

@@ -62,20 +62,31 @@ public class DBService {
 		Book book3 = new Book(null, "Livro 3", 150, Genre.Biografia, "https://www.redeicm.org.br/carmo/wp-content/uploads/sites/5/2019/01/Livro.jpg");
 		Book book4 = new Book(null, "Livro 4", 99, Genre.Terror, "https://www.redeicm.org.br/carmo/wp-content/uploads/sites/5/2019/01/Livro.jpg");
 		Book book5 = new Book(null, "Livro 5", 50, Genre.FiccaoCientifica, "https://www.redeicm.org.br/carmo/wp-content/uploads/sites/5/2019/01/Livro.jpg");
+		Book book6 = new Book(null, "Livro 5.1", 50, Genre.FiccaoCientifica, "https://www.redeicm.org.br/carmo/wp-content/uploads/sites/5/2019/01/Livro.jpg");
+		Book book7 = new Book(null, "Livro 5.2", 50, Genre.FiccaoCientifica, "https://www.redeicm.org.br/carmo/wp-content/uploads/sites/5/2019/01/Livro.jpg");
+		Book book8 = new Book(null, "Livro 5.3", 50, Genre.FiccaoCientifica, "https://www.redeicm.org.br/carmo/wp-content/uploads/sites/5/2019/01/Livro.jpg");
+		Book book9 = new Book(null, "Livro 5.4", 50, Genre.FiccaoCientifica, "https://www.redeicm.org.br/carmo/wp-content/uploads/sites/5/2019/01/Livro.jpg");
 		
 		user1.getBooks().addAll(Arrays.asList(book1, book2));
 		user2.getBooks().addAll(Arrays.asList(book1, book3));
 		user3.getBooks().addAll(Arrays.asList(book4, book1, book5));
 		
+		admin.getBooks().addAll(Arrays.asList(book5, book6, book7, book8));
+		
 		book1.getUsers().addAll(Arrays.asList(user1, user2, user3));
 		book2.getUsers().addAll(Arrays.asList(user1));
 		book3.getUsers().addAll(Arrays.asList(user2));
 		book4.getUsers().addAll(Arrays.asList(user3));
-		book5.getUsers().addAll(Arrays.asList(user3));
+		book5.getUsers().addAll(Arrays.asList(user3, admin));
 		
-		user1.addTrophy(trof1);
-		user2.addTrophy(trof1);
-		user3.addTrophy(trof1);
+		book6.getUsers().addAll(Arrays.asList(admin));
+		book7.getUsers().addAll(Arrays.asList(admin));
+		book8.getUsers().addAll(Arrays.asList(admin));
+		//book9.getUsers().addAll(Arrays.asList(admin));
+		
+		user1.addTrophyManually(trof1);
+		user2.addTrophyManually(trof1);
+		user3.addTrophyManually(trof1);
 		
 		trof1.getUsers().addAll(Arrays.asList(user1, user2, user3));
 		
@@ -86,7 +97,7 @@ public class DBService {
 		userService.points(user3);
 		userService.points(admin);
 		
-		bookRepository.saveAll(Arrays.asList(book1, book2, book3, book4, book5));
+		bookRepository.saveAll(Arrays.asList(book1, book2, book3, book4, book5, book6, book7, book8, book9));
 		trophyRepository.saveAll(Arrays.asList(trof1));
 		userRepository.saveAll(Arrays.asList(user1, user2, user3, admin, user4, user5, user6, user7, user8, user9, user10, user11, user12, user13, user14, user15));
 	}

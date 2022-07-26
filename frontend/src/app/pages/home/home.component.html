@@ -1,3 +1,16 @@
 <app-header></app-header>
-<app-loading></app-loading>
+<h1 fxLayoutAlign="center center" class="primary-color">Livros</h1>
+<div>
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="1rem" class="grid-list-home">
+        <div class="book-card" *ngFor="let book of books">
+                <app-book-card
+                bookName={{book.name}}
+                pages={{book.pages}}
+                genre={{book.genre}}
+                urlImg={{book.urlImg}}
+            ></app-book-card>
+        </div>
+    </div>
+</div>
+<app-loading [hidden]="books"></app-loading>
 <app-footer></app-footer>

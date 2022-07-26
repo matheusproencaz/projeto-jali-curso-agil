@@ -9,6 +9,7 @@ import { LoginService } from 'src/app/services/LoginService/login.service';
 export class HeaderComponent implements OnInit {
 
   admin: boolean;
+  nomeUsuario: string;
 
   constructor(private loginService: LoginService) { }
 
@@ -18,6 +19,8 @@ export class HeaderComponent implements OnInit {
         .subscribe(res => {
           this.admin = res
         })
+
+       this.nomeUsuario = this.loginService.userName;
   }
 
   logout(){

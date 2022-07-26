@@ -10,8 +10,10 @@ import com.mpz.EsseEuJaLi.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
-
 	
 	@Transactional(readOnly = true)
 	User findByName(String name);
+	
+//	@Query("SELECT u FROM User u JOIN FETCH u.books JOIN FETCH u.trophies WHERE u.id = :id")
+//	User findUserInformation(@Param("id") Long id);
 }

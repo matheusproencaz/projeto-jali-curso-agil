@@ -9,9 +9,28 @@
 .image{
     height: 100vh;
     width: 50vw;
-    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+}
+
+.titleLogo{
+    position: absolute;
+    font-size: 64px;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 1px white;
 }
 
 .page button{
     padding: 0 2rem;
+}
+
+@media (max-width: 959.99px) {
+
+    .page{
+        width: 100vw;
+        height: 100vh;
+    }
 }

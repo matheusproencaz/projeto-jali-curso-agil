@@ -1,0 +1,21 @@
+<mat-card class="card" fxLayout="column">
+    <mat-card-header class="header">
+        <div mat-card-avatar class="card-avatar" style="background-image: url('{{urlImg}}')">
+            <!-- <img src={{urlImg}} alt={{bookName}}/> -->
+        </div>
+        <mat-card-title class="title">{{bookName}}</mat-card-title>
+        <mat-card-subtitle class="subtitle">{{genre}}</mat-card-subtitle>
+    </mat-card-header>
+    <img src={{urlImg}} alt={{bookName}} class="card-image"/>
+    <mat-card-content></mat-card-content>
+    <mat-card-actions fxLayoutAlign="center center">
+        <button mat-button> 
+            <mat-icon class="icon">library_add</mat-icon>
+            <span>Marcar como Lido</span>
+        </button>
+<!--        <button mat-button>
+            <mat-icon>remove_circle_outline</mat-icon>
+            <span>Remover</span>
+        </button>-->
+    </mat-card-actions>
+</mat-card>

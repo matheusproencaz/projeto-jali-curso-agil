@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.mpz.EsseEuJaLi.services.exceptions.AlreadyAdded;
 import com.mpz.EsseEuJaLi.services.exceptions.AuthorizationException;
 import com.mpz.EsseEuJaLi.services.exceptions.DataIntegrityException;
 import com.mpz.EsseEuJaLi.services.exceptions.ObjectNotFoundException;
@@ -32,6 +33,12 @@ public class ResourceExceptionHandler {
 	public ResponseEntity<StandardError> authorization(DataIntegrityException e, HttpServletRequest request){
 		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), "Erro de integridade de dados!" , e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+	}
+	
+	@ExceptionHandler(AlreadyAdded.class)
+	public ResponseEntity<StandardError> alreadyAdded(AlreadyAdded e, HttpServletRequest request){
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.CONFLICT.value(), "Objeto já adicionado!" , e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(err);
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)

@@ -7,7 +7,6 @@ import javax.validation.constraints.Size;
 
 import com.mpz.EsseEuJaLi.model.User;
 import com.mpz.EsseEuJaLi.services.validations.UserInsert;
-import com.mpz.EsseEuJaLi.services.validations.UserUpdate;
 
 @UserInsert
 public class UserLoginDTO implements Serializable{

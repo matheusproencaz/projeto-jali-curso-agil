@@ -24,6 +24,7 @@ public enum Genre {
 	
 	private int cod;
 	private String description;
+	
 	private static List<String> descriptions = new ArrayList<>(Arrays.asList("Ação", "Aventura", "Clássico", "Quadrinhos", "Mistério",
 			"Fantasia", "Histórico", "Romance", "Bigrafia", "Comida", "Drama", "Terror",  "Poesia", "Ficção científica", "Política"));
 	

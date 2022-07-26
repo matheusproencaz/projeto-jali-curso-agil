@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/LoginService/login.service';
-import User from 'src/app/shared/User';
+import User, { UserLogin } from 'src/app/shared/User';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   errors: string[] | any = [];
   
-  user: User = {
+  user: UserLogin = {
     name: '',
     password: '',
   }

@@ -23,6 +23,11 @@ export class ExceptionHandlerService {
       return throwError(() => {});
     }
 
+    if(error?.status === 401){
+      alert(error.error.message)
+      return throwError(() => {})
+    }
+
     let errMsg: string = error?.error?.message;
     // alert(error.error.message);
     return throwError(() => new Error(errMsg));

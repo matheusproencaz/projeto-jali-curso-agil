@@ -1,7 +1,7 @@
 package com.mpz.EsseEuJaLi.model.dto;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.mpz.EsseEuJaLi.model.Book;
 import com.mpz.EsseEuJaLi.model.Trophy;
@@ -13,8 +13,8 @@ public class UserDTO {
 	private String name;
 	private Integer points;
 	
-	private List<Book> books = new ArrayList<>();
-	private List<Trophy> trophies = new ArrayList<>();
+	private Set<Book> books = new HashSet<>();
+	private Set<Trophy> trophies = new HashSet<>();
 	
 	public UserDTO(User user) {
 		this.id = user.getId();
@@ -36,11 +36,11 @@ public class UserDTO {
 		return points;
 	}
 
-	public List<Book> getBooks() {
+	public Set<Book> getBooks() {
 		return books;
 	}
 
-	public List<Trophy> getTrophies() {
+	public Set<Trophy> getTrophies() {
 		return trophies;
 	}
 }

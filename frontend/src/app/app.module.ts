@@ -20,6 +20,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCardModule } from '@angular/material/card';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -33,6 +34,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { TokenInterceptorService } from './interceptors/TokenInterceptor/token-interceptor.service';
 import { AdminComponent } from './pages/admin/admin.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { BookCardComponent } from './components/book-card/book-card.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     HomeComponent,
     AdminComponent,
     LoadingComponent,
+    BookCardComponent,
     
   ],
   imports: [
@@ -68,6 +71,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     MatCheckboxModule,
     MatGridListModule,
     MatPaginatorModule,
+    MatCardModule,
+
     
   ],
   providers: [

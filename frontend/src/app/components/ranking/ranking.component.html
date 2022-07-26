@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div *ngIf="ranking">
-    <h1 fxLayoutAlign="center center" class="primary-color" style="margin-top: 2rem;">Ranking</h1>
-    <mat-grid-list cols="3" rowHeight="10:2" *ngFor="let ranker of ranking" class="ranking">
+    <h1 fxLayoutAlign="center center" class="h1title primary-color" style="margin-top: 2rem;">Ranking</h1>
+    <mat-grid-list cols="3" rowHeight="7.28vh" *ngFor="let ranker of ranking" class="ranking">
         <mat-grid-tile style="font-size:24px;">
             # {{(ranking.indexOf(ranker) + 1) + numberPage * 10}}
         </mat-grid-tile>

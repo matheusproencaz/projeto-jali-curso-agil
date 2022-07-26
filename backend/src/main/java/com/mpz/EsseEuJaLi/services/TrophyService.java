@@ -27,18 +27,19 @@ public class TrophyService {
 		return trophyRepository.findAll();
 	}
 	
+	public Trophy findTrophyByName(String name) {
+		return trophyRepository.findByName(name);
+	}
+	
 	public Trophy insertTrophy(Trophy trophy) {
-		trophy = trophyRepository.save(trophy);
-		return trophy;
+		return trophyRepository.save(trophy); 
 	}
 	
 	public void deleteTrophy(Long id) {
-		
 		try {
 			trophyRepository.delete(findTrophy(id));
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possível excluir um Troféu que possui usuários.");
 		}
 	}
-	
 }
