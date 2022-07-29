@@ -1,0 +1,28 @@
+<app-header></app-header>
+<h1 fxLayoutAlign="center center" class="primary-color" >{{book.name}}</h1>
+<div *ngIf="book.id != 0" fxLayoutAlign="center start" class="container">
+    <div class="info" fxLayoutAlign="center center" fxLayout="column">
+        <img src={{book.urlImg}} alt={{book.name}}>
+
+        <div fxLayoutGap="2rem">
+            <p style="font-weight: bold;">Descrição</p>
+            <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate amet doloremque possimus libero quibusdam nisi consequatur quam quod molestiae impedit cupiditate, modi facere nulla debitis commodi in? Atque, laudantium quam.</p>
+            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quos, ullam nisi eum beatae ipsam accusamus voluptate veritatis quis esse corporis ea expedita, excepturi asperiores optio suscipit veniam! Blanditiis, quae?</p>
+            
+            <p><span style="font-weight: bold;">Gênero:</span> {{book.genre}}</p>
+            <p><span style="font-weight: bold;">Páginas:</span> {{book.pages}} páginas</p>
+            <p>
+                <span style="font-weight: bold;">Usuários que leram esse livro: </span> 
+                <span *ngFor="let user of book.users?.slice(0,3);">
+                    {{user.name}}
+                </span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="notFound" fxLayoutAlign="center center" style="height: calc(100vh - 350.875px);">
+    <h2>Nenhum livro encontrado!</h2>
+</div>
+<app-loading [hidden]="book.id != 0 || notFound"></app-loading>
+<app-footer></app-footer>

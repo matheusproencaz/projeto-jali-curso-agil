@@ -7,3 +7,8 @@ a{
 a:hover{
     opacity: 80%;
 }
+
+footer{
+    position: sticky;
+    top: calc(100vh - 64px);
+}

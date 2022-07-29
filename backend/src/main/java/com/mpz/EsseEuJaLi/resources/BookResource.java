@@ -32,25 +32,23 @@ public class BookResource {
 	@Autowired
 	private BookService bookService;
 	
-	@GetMapping
-	public ResponseEntity<Page<BookDTO>> findPageBooks(
-			@RequestParam(value = "name", defaultValue = "0") String name,
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-			@RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
-			@RequestParam(value = "direction", defaultValue = "ASC") String direction){
-		
-		String nameDecoded = URLDecode.decodeParam(name);
-		
-		Page<Book> pageObj = bookService.findAllPageble(nameDecoded, page, linesPerPage, orderBy, direction);
-		Page<BookDTO> objDTO = pageObj.map(x -> new BookDTO(x));
-		
-		return ResponseEntity.ok(objDTO);
-	}
+//	@GetMapping
+//	public ResponseEntity<Page<BookDTO>> findPageBooks(
+//			@RequestParam(value = "page", defaultValue = "0") Integer page,
+//			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+//			@RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
+//			@RequestParam(value = "direction", defaultValue = "ASC") String direction){
+//		
+//		Page<Book> pageObj = bookService.findAllPageble(page, linesPerPage, orderBy, direction);
+//		Page<BookDTO> objDTO = pageObj.map(x -> new BookDTO(x));
+//		
+//		return ResponseEntity.ok(objDTO);
+//	}
 	
-	@GetMapping("/name")
+	@GetMapping
 	public ResponseEntity<Page<BookDTO>> searchBookByName(
-			@RequestParam(value = "name", defaultValue = "0") String name,
+			@RequestParam(value = "name", defaultValue = "") String name,
+			@RequestParam(value = "genre", defaultValue = "0") Integer genre,
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
 			@RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
@@ -58,21 +56,10 @@ public class BookResource {
 		
 		String nameDecoded = URLDecode.decodeParam(name);
 		
-		Page<Book> pageObj = bookService.searchBooksByName(nameDecoded, page, linesPerPage, orderBy, direction);
-		Page<BookDTO> objDTO = pageObj.map(x -> new BookDTO(x));
+		System.out.println("Resource "+ name);
+		System.out.println("Resource "+ genre);
 		
-		return ResponseEntity.ok(objDTO);
-	}
-
-	@GetMapping("/genre/{genre}")
-	public ResponseEntity<Page<BookDTO>> searchBookByGenre(
-			@PathVariable Integer genre,
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-			@RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
-			@RequestParam(value = "direction", defaultValue = "ASC") String direction){
-		
-		Page<Book> pageObj = bookService.searchBooksByGenre(genre, page, linesPerPage, orderBy, direction);
+		Page<Book> pageObj = bookService.searchBooks(nameDecoded, genre, page, linesPerPage, orderBy, direction);
 		Page<BookDTO> objDTO = pageObj.map(x -> new BookDTO(x));
 		
 		return ResponseEntity.ok(objDTO);

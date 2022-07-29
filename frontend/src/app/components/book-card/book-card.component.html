@@ -1,21 +1,38 @@
 <mat-card class="card" fxLayout="column">
     <mat-card-header class="header">
-        <div mat-card-avatar class="card-avatar" style="background-image: url('{{urlImg}}')">
-            <!-- <img src={{urlImg}} alt={{bookName}}/> -->
-        </div>
-        <mat-card-title class="title">{{bookName}}</mat-card-title>
-        <mat-card-subtitle class="subtitle">{{genre}}</mat-card-subtitle>
+        <mat-card-title class="title">{{_bookName}}</mat-card-title>
+        <mat-card-subtitle class="subtitle">{{_genre}}</mat-card-subtitle>
     </mat-card-header>
-    <img src={{urlImg}} alt={{bookName}} class="card-image"/>
-    <mat-card-content></mat-card-content>
+    <img mat-card-image
+        src='{{_urlImg}}'
+        alt="Book Image"
+        class="image"
+        (error)="noImageFunction()"
+    >
+    <mat-card-content fxLayoutAlign="space-between">
+        <p *ngIf="overThanOne">
+            {{_users}} usuários leram esse livro.
+        </p>
+        <p *ngIf="!overThanOne">
+            Um usuário leu esse livro.
+        </p>
+        <p>Páginas: {{_pages}}</p>
+    </mat-card-content>
     <mat-card-actions fxLayoutAlign="center center">
-        <button mat-button> 
-            <mat-icon class="icon">library_add</mat-icon>
+        <button *ngIf="!markedBoolean" mat-button (click)="onClickRead()" > 
             <span>Marcar como Lido</span>
+            <mat-icon class="icon">library_add</mat-icon>
         </button>
-<!--        <button mat-button>
-            <mat-icon>remove_circle_outline</mat-icon>
-            <span>Remover</span>
-        </button>-->
+
+        
+        <button *ngIf="markedBoolean" mat-flat-button color="primary" (click)="onClickRemove()">
+            <span>Lido</span>
+            <mat-icon class="icon">check</mat-icon>
+        </button>
+
+        <button  mat-button [routerLink]="['/books', _bookId]"> 
+            <span>Ver Mais</span>
+            <mat-icon class="icon2" svgIcon="plusSolid"></mat-icon>
+        </button>
     </mat-card-actions>
 </mat-card>

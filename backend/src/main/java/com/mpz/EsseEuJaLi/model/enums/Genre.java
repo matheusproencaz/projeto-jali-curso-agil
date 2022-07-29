@@ -14,8 +14,8 @@ public enum Genre {
 	Fantasia(6, "Fantasia"),
 	Historico(7, "Histórico"),
 	Romance(8, "Romance"),
-	Biografia(9, "Bigrafia"),
-	Comida(10, "Comida"),
+	Biografia(9, "Biografia"),
+	Comida(10, "Comida"), 	
 	Drama(11, "Drama"),
 	Terror(12, "Terror"),
 	Poesia(13, "Poesia"),
@@ -26,7 +26,7 @@ public enum Genre {
 	private String description;
 	
 	private static List<String> descriptions = new ArrayList<>(Arrays.asList("Ação", "Aventura", "Clássico", "Quadrinhos", "Mistério",
-			"Fantasia", "Histórico", "Romance", "Bigrafia", "Comida", "Drama", "Terror",  "Poesia", "Ficção científica", "Política"));
+			"Fantasia", "Histórico", "Romance", "Biografia", "Comida", "Drama", "Terror",  "Poesia", "Ficção científica", "Política"));
 	
 	private Genre(int cod, String description) {
 		this.cod = cod;

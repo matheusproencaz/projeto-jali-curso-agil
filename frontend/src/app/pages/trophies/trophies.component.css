@@ -1,0 +1,33 @@
+.img-trof{
+    width: 50px;
+    opacity: 80%;
+}
+
+.trophy{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-right: 2rem;
+}
+
+.item-list{
+    margin-bottom: 2rem;
+}
+
+.trophy span{
+    font-weight: bold;
+    font-size: 14px;
+    position: absolute;
+}
+
+.list{
+    max-width: 1080px;
+    margin: auto;
+}
+
+.h1title{
+    font-size: 32px;
+    font-weight: bold;
+}
+
+

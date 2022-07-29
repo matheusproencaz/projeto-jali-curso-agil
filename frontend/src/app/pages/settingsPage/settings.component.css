@@ -1,0 +1,25 @@
+h1{
+    align-self: center;
+    margin-top: 2rem;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.container{
+    max-width: 760px;
+    margin: auto;
+}
+
+.settingForm{
+    
+}
+
+.input {
+    width: auto;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+p{
+    width: 100%;
+}

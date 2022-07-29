@@ -29,7 +29,7 @@ export class ExceptionHandlerService {
     }
 
     let errMsg: string = error?.error?.message;
-    // alert(error.error.message);
+    console.log(errMsg);
     return throwError(() => new Error(errMsg));
    }
 }

@@ -112,6 +112,10 @@ public class User implements Serializable{
 		this.trophies.add(trophy);
 	}
 	
+	public void removeTrophy(Trophy trophy) {
+		this.trophies.remove(trophy);
+	}
+	
 	public Set<Role> getRoles() {
 		return roles.stream().map(x -> Role.toEnum(x)).collect(Collectors.toSet());
 	}

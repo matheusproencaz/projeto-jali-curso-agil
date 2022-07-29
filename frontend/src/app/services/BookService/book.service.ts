@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
-import { PageBook } from 'src/app/shared/Book';
+import Book, { PageBook } from 'src/app/shared/Book';
 import { environment } from 'src/environments/environment';
 import { ExceptionHandlerService } from '../ExceptionHandler/exception-handler.service';
 
@@ -15,8 +15,47 @@ export class BookService {
     private erroMsg: ExceptionHandlerService,
   ) { }
 
-  getAllBooks(): Observable<PageBook> {
-    return this.http.get<PageBook>(`${environment.apiUrl}/books`)
+  getPageBooks(page: number, title?: string, genre?: number): Observable<PageBook> {
+    
+    if(!page){
+      page = 0;
+    }
+
+    let url = `${environment.apiUrl}/books?page=${page}`;
+
+    if(title){
+      url += `&name=${title}`;
+    }
+    
+    if(genre){
+      url += `&genre=${genre}`
+    }
+
+    return this.http.get<PageBook>
+        (url)
         .pipe(catchError(this.erroMsg.handleError));
   }
+
+  getGenres(): Observable<string[]>{
+    return this.http.get<string[]>(`${environment.apiUrl}/books/genres`)
+                    .pipe(catchError(this.erroMsg.handleError));
+  }
+
+  getBook(id: number): Observable<Book>{
+    return this.http.get<Book>(`${environment.apiUrl}/books/${id}`)
+                    .pipe(catchError(this.erroMsg.handleError));
+  }
+
+  addBook(idUser: number, idBook: number): Observable<any> {
+    return this.http.patch(`${environment.apiUrl}/users/${idUser}/addBook/${idBook}`, null)
+                    .pipe(catchError(this.erroMsg.handleError));
+  }
+
+  removeBook(idUser: number, idBook: number): Observable<any> {
+    return this.http.patch(`${environment.apiUrl}/users/${idUser}/removeBook/${idBook}`, null)
+                    .pipe(catchError(this.erroMsg.handleError));
+  }
+
+  
+
 }

@@ -14,6 +14,13 @@ export class UserLogin{
     password: string;
 }
 
+export class UserUpdate{
+    id: number;
+    userName: string;
+    oldPassword: string;
+    newPassword: string;
+}
+
 export class PageUser {
     content: User[];
     empty: boolean;

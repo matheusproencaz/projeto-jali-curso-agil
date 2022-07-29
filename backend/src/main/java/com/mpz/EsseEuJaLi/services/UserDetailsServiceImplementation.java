@@ -17,7 +17,10 @@ public class UserDetailsServiceImplementation implements UserDetailsService{
 	private UserRepository repository;
 	
 	@Override
-	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String credetials) throws UsernameNotFoundException {
+		
+		String name = credentialsDecode(credetials);
+		
 		User user = repository.findByName(name);
 		
 		if(user == null) {
@@ -25,5 +28,10 @@ public class UserDetailsServiceImplementation implements UserDetailsService{
 		}
 		
 		return new UserSS(user.getId(), user.getName(), user.getPassword(), user.getRoles());
+	}
+	
+	private String credentialsDecode(String credentials) {
+		String[] separeteCreds = credentials.split("ID:"); 
+		return separeteCreds[0];
 	}
 }

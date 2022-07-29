@@ -1,20 +1,25 @@
 <header>
     <mat-toolbar color="primary">
         <span class="spacer-short"></span>
-        <a class="logo" href="/home">Já Li</a>
+        <a class="logo" routerLink="/home">Já Li</a>
         <span class="spacer-short"></span>
 
-        <a mat-button aria-label="Button to Home" href="#">
+        <a mat-button aria-label="Button to Home" routerLink="/home">
             <mat-icon>home</mat-icon>
             <span fxHide.xs> Home </span>
         </a>
 
-        <a mat-button aria-label="Button to Rankings" routerLink="/ranking" href="#">
+        <a mat-button aria-label="Button to Rankings" routerLink="/ranking" >
             <mat-icon>insert_chart_outlined</mat-icon>
             <span fxHide.xs> Ranking </span>
         </a>
 
-        <a *ngIf="admin" mat-button aria-label="Button to Rankings" href="#">
+        <a mat-button aria-label="Button to Rankings" routerLink="/trophies">
+            <mat-icon svgIcon="trophy"></mat-icon>
+            <span fxHide.xs> Troféus </span>
+        </a>
+
+        <a *ngIf="admin" mat-button aria-label="Button to Rankings" routerLink="/admin">
             <mat-icon>security</mat-icon>
             <span fxHide.xs> Admin </span>
         </a>
@@ -28,7 +33,7 @@
 
     <mat-menu #menu="matMenu" >
         
-        <button mat-menu-item aria-label="Button to Settings and Logout">
+        <button mat-menu-item aria-label="Button to Settings and Logout" routerLink="/settings">
             <mat-icon class="menuItem">settings</mat-icon>
             <span style="font-weight: bold;">Configurações</span>
         </button>
@@ -39,3 +44,4 @@
         </a>
     </mat-menu>
 </header>
+<mat-progress-bar mode="determinate" [value]="progressBar"></mat-progress-bar>

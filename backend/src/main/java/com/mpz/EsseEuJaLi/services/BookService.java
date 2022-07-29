@@ -21,21 +21,28 @@ public class BookService {
 	@Autowired
 	private BookRepository bookRepository;
 	
+	
 	public Book findBook(Long id){
 		Optional<Book> obj = bookRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Livro não encontrado! Id: "+id+", Tipo: " + Book.class.getName()));
 	}
-	
-	public Page<Book> findAllPageble(String name, Integer page, Integer linesPerPage, String orderBy, String direction) {
+
+	public Page<Book> searchBooks(String name, Integer genre, Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+
+		if((name != "") && (genre != 0)) {
+			return bookRepository.findByNameContainsAndGenre(name, genre, pageRequest);
+		}
 		
+		if(genre != 0) {
+			return bookRepository.findByGenre(genre, pageRequest);
+		}
+		
+		if(name != "") {
+			return bookRepository.findByNameContains(name, pageRequest);
+		}
+
 		return bookRepository.findAll(pageRequest);
-	}
-	
-	public Page<Book> searchBooksByName(String name, Integer page, Integer linesPerPage, String orderBy, String direction) {
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		
-		return bookRepository.findDistinctByNameContaining(name, pageRequest);
 	}
 	
 	public Page<Book> searchBooksByGenre(Integer genre, Integer page, Integer linesPerPage, String orderBy, String direction) {

@@ -29,7 +29,7 @@ public class UserInsertValidator implements ConstraintValidator<UserInsert, User
 		
 		User aux = repository.findByName(objDTO.getName());
 		if(aux != null) {
-			list.add(new FieldMessage("name", "Usuário já existe!"));
+			list.add(new FieldMessage("Nome de Usuário", "Usuário já existe!"));
 		}
 		
 		for(FieldMessage e : list) {

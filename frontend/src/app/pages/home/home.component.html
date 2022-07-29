@@ -1,16 +1,54 @@
 <app-header></app-header>
 <h1 fxLayoutAlign="center center" class="primary-color">Livros</h1>
+
+<div class="searchArea" fxLayoutGap="1rem" fxLayout.lt-sm="column">
+    <span class="spacer-full"></span>   
+    <mat-form-field appearance="fill">
+        <mat-label>Gênero</mat-label>
+        <mat-select [(value)]="selectedGenre">
+                <mat-option></mat-option>
+                <mat-option *ngFor="let genre of genresList" [value]="genre">{{genre}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    
+    <div class="search">
+        <input class="input" [(ngModel)]="searchInputValue" type="text" placeholder="Pesquisar Livro" name="searchInput"/>
+        <button class="btn" (click)="onClick()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </div>
+
+    <span class="spacer-short"></span>
+    </div>
 <div>
     <div fxFlex fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="1rem" class="grid-list-home">
         <div class="book-card" *ngFor="let book of books">
                 <app-book-card
-                bookName={{book.name}}
-                pages={{book.pages}}
-                genre={{book.genre}}
-                urlImg={{book.urlImg}}
-            ></app-book-card>
+                _userId={{user.id}}
+                _bookId={{book.id}}
+                _bookName={{book.name}}
+                _pages={{book.pages}}
+                _genre={{book.genre}}
+                _urlImg={{book.urlImg}}
+                _users={{book.users?.length}}
+                _marked={{book.marked}}
+                ></app-book-card>
         </div>
     </div>
 </div>
-<app-loading [hidden]="books"></app-loading>
+
+<div *ngIf="notFound" fxLayoutAlign="center center" style="height: calc(100vh - 350.875px);">
+    <h2 class="notFound">Não foi encontrado nenhum livro!</h2>
+</div>
+
+<app-loading [hidden]="bookPage"></app-loading>
+
+<mat-paginator 
+    [pageSize]="1"
+    [length]="totalPages"
+    (page)="getPaginatorData($event)"
+    aria-label="Select page"
+    >
+</mat-paginator>
+
 <app-footer></app-footer>

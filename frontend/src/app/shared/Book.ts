@@ -6,6 +6,7 @@ export default class Book{
     pages: number;
     genre: string;
     urlImg:string;
+    marked?: boolean;
     users?:User[];
 }
 
@@ -20,5 +21,5 @@ export class PageBook {
     size: number;
     sort: any;
     totalElements: number;
-    totalPage: number;
+    totalPages: number;
 }

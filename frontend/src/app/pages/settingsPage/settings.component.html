@@ -1,1 +1,34 @@
-<p>settings works!</p>
+<app-header></app-header>
+
+<h1 fxLayoutAlign="center center" class="primary-color">Configurações</h1>
+
+<div class="container" fxFlexAlign="center center">
+    <form novalidate #sForm="ngForm"  id="settingForm" class="settingForm" [formGroup]="settingForm" (ngSubmit)="onSubmit()"
+        fxLayoutAlign="center center" fxLayout="column">
+        <p fxLayoutGap="2rem" fxLayout="column">
+            <mat-form-field class="input">
+                <input matInput formControlName="userName" type="text" placeholder="Nome" name="name">
+                <mat-error *ngIf="formErrors.userName">
+                    {{ formErrors.userName }}
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="input">
+                <input matInput formControlName="oldPassword" type="password" placeholder="Senha Antiga" name="oldPassword">
+                <mat-error *ngIf="formErrors.oldPassword">
+                    {{ formErrors.oldPassword }}
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="input">
+                <input matInput formControlName="newPassword" type="password" placeholder="Nova Senha" name="newPassword">
+                <mat-error *ngIf="formErrors.newPassword">
+                    {{ formErrors.newPassword }}
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <button mat-raised-button type="submit" color="primary" [disabled]="settingForm.invalid">Alterar</button>
+    </form>
+</div>
+
+<app-footer></app-footer>

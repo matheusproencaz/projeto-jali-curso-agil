@@ -12,7 +12,13 @@ import com.mpz.EsseEuJaLi.model.Book;
 public interface BookRepository extends JpaRepository<Book, Long> {
 
 	@Transactional(readOnly = true)
-	Page<Book> findDistinctByNameContaining(String name, Pageable pageRequest);
+	Page<Book> findByNameContainsAndGenre(String name, Integer genre, Pageable pageRequest);
+	
+	@Transactional(readOnly = true)
+	Page<Book> findByNameContains(String name, Pageable pageRequest);
+	
+	@Transactional(readOnly = true)
+	Page<Book> findByNameContainsOrGenre(String name, Integer genre, Pageable pageRequest);
 	
 	@Transactional(readOnly = true)
 	Page<Book> findByGenre(Integer genre, Pageable pageRequest);

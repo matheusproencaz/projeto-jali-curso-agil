@@ -1,0 +1,23 @@
+<app-header></app-header>
+<div *ngIf="trophies"> 
+    <h1 
+    fxLayoutAlign="center center"
+    class="h1title primary-color" 
+    style="margin-top: 2rem;"
+    >Troféus</h1>
+
+    <div class="list">
+        <mat-list *ngFor="let trophy of trophies">
+            <mat-list-item class="item-list">
+                <div class="trophy">
+                    <img class="img-trof" src="../../../assets/imgs/TrofeuParaPaginaTrofeus.png" alt="Trofeú"/>
+                    <span>{{trophy.genre}}</span>
+                </div>
+                <span style="font-weight: bold;">{{trophy.name}}</span>
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>
+
+<app-loading [hidden]="trophies != undefined"></app-loading>
+<app-footer></app-footer>

@@ -1,18 +1,38 @@
 @import url(./../../../styles.css);
 
+.title{
+    font-size: 24px;
+}
+
 .card{
-    max-width: auto;
-}
-
-.card-avatar{
-    background-size: cover;
-}
-
-.card-image{
     max-width: 400px;
 }
 
+.image{
+    background-color: #F6F6F6;
+}
+
 .icon{
-    padding-right: 10px;
-    font-family: 'Material Icons', sans-serif !important;
+    padding-left: 10px;
+    font-family: 'Material Icons', sans-serif !important;   
+}
+
+.icon2{
+    padding-left: 10px;
+}
+
+button{
+    font-size: 20px;
+}
+
+@media (max-width: 960px) {
+    
+    .card{
+        max-width: 400px;
+    }
+
+    .image{
+        width: auto;
+    }
+
 }

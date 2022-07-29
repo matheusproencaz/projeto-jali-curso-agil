@@ -11,6 +11,8 @@ export class HeaderComponent implements OnInit {
   admin: boolean;
   nomeUsuario: string;
 
+  progressBar: number = 0;
+
   constructor(private loginService: LoginService) { }
 
   ngOnInit(): void {
@@ -21,6 +23,8 @@ export class HeaderComponent implements OnInit {
         })
 
        this.nomeUsuario = this.loginService.userName;
+
+       this.progressBarTimer();
   }
 
   logout(){
@@ -28,4 +32,17 @@ export class HeaderComponent implements OnInit {
     this.loginService.logout();
   }
 
+  progressBarTimer(){
+    this.progressBar = 0;
+    setTimeout(() => {
+      const timer = setInterval(() => {
+        this.progressBar += 1;
+  
+        if(this.progressBar >= 100){
+          clearInterval(timer);
+        }
+      }, 1)
+
+    }, 300);
+  }
 }

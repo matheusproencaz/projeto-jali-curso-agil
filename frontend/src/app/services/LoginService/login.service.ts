@@ -14,6 +14,7 @@ export class LoginService {
 
   public token: string;
   userName: string;
+  userId: number;
   expirationDate: number;
 
   constructor(
@@ -42,10 +43,15 @@ export class LoginService {
     this.token = res.headers.get('Authorization');
     
     const payload: any = jwtDecode(this.token);
-    this.userName = payload.sub;
+    
+    const [userName, userId] = payload.sub.split("ID:");
+    
+    this.userName = userName;
+    this.userId = Number(userId);
     this.expirationDate = payload.exp;
 
-    localStorage.setItem('user', this.userName);
+    localStorage.setItem('userName', this.userName);
+    localStorage.setItem('userId', this.userId.toString());
     localStorage.setItem('expirationDate', this.expirationDate.toString())
     return localStorage.setItem('token', this.token);
   }
@@ -55,7 +61,11 @@ export class LoginService {
   }
 
   public getUserName(){
-    return localStorage.getItem('user');
+    return localStorage.getItem('userName');
+  }
+
+  public getUserId(){
+    return localStorage.getItem('userId');
   }
 
   public getExpirationDate(){
@@ -71,13 +81,13 @@ export class LoginService {
     this.userName = '';
     this.expirationDate = 0;
     localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userId');
     localStorage.removeItem('expirationDate');
     this.router.navigate(["/login"]);
   }
 
   adminRequest(): Observable<boolean>{
-
     const options = {
       headers: new HttpHeaders({
         'Authorization': `${this.token}`
