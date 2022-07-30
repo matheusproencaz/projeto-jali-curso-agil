@@ -110,6 +110,6 @@ export class LoginService {
           this.errorMsg.handleError(err);
           return of(false);
         })
-      );
+      );    
   }
 } 

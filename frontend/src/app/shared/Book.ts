@@ -1,7 +1,7 @@
 import User from './User';
 
 export default class Book{
-    id: number;
+    id?: number;
     name: string;
     pages: number;
     genre: string;

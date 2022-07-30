@@ -39,12 +39,12 @@ public class UserUpdateValidator implements ConstraintValidator<UserUpdate, User
 		Map<String, String> map = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 		Long uriId = Long.parseLong(map.get("id"));
 		
-		List<FieldMessage> list = new ArrayList<>();
+		List<FieldMessage> list = new ArrayList<>(); 
 		
 		User aux = repository.findByName(objDTO.getUserName());
 		
 		if(aux != null && !aux.getId().equals(uriId)) {
-			list.add(new FieldMessage("Nome de Usuário", "Nome de usuário já existe!"));
+			list.add(new FieldMessage("userName", "Nome de usuário já existe!"));
 		}
 		
 		User auxPass = repository.findById(objDTO.getId()).orElse(aux);

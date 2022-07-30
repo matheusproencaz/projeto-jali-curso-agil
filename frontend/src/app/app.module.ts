@@ -40,6 +40,8 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { BookCardComponent } from './components/book-card/book-card.component';
 import { TrophiesComponent } from './pages/trophies/trophies.component';
 import { BookComponent } from './pages/book/book.component';
+import { AddBookComponent } from './components/add-book/add-book.component';
+import { AddTrophyComponent } from './components/add-trophy/add-trophy.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { BookComponent } from './pages/book/book.component';
     BookCardComponent,
     TrophiesComponent,
     BookComponent,
+    AddBookComponent,
+    AddTrophyComponent,
     
   ],
   imports: [

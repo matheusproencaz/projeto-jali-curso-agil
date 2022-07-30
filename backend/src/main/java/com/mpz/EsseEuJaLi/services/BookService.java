@@ -1,5 +1,6 @@
 package com.mpz.EsseEuJaLi.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,10 @@ public class BookService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Livro não encontrado! Id: "+id+", Tipo: " + Book.class.getName()));
 	}
 
+	public List<Book> findAllBooks(){
+		return bookRepository.findAll();
+	}
+	
 	public Page<Book> searchBooks(String name, Integer genre, Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 
@@ -57,12 +62,9 @@ public class BookService {
 		return obj;
 	}
 	
-	@Transactional
 	public void deleteBook(Long id) {
-		Book obj = findBook(id);
-		
 		try {
-			bookRepository.delete(obj);
+			bookRepository.delete(findBook(id));
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possível excluir um livro que possui usuários.");
 		}

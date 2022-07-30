@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { map, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExceptionHandlerService {
 
+  public errorsToSend: Observable<string[][]>;
+
   constructor() {}
     
   public handleError(error: any){
-    // Fazer o tratamento dos erros de forma correta!
-    
     if(error?.status === 403){
-      return throwError(() => {})
+      return throwError(() => {});
     }
 
     if(error?.status === 422) {
@@ -25,11 +25,15 @@ export class ExceptionHandlerService {
 
     if(error?.status === 401){
       alert(error.error.message)
-      return throwError(() => {})
+      return throwError(() => {});
+    }
+
+    if(error?.status === 400){
+      alert(error.error.message);
+      return throwError(() => {});
     }
 
     let errMsg: string = error?.error?.message;
-    console.log(errMsg);
     return throwError(() => new Error(errMsg));
    }
 }

@@ -28,7 +28,7 @@ export class TrophyService {
     .pipe(catchError(this.handlerHTTP.handleError)); 
   }
 
-  removeTrophy(trophyId: number): Observable<boolean> {
+  deleteTrophy(trophyId: number): Observable<boolean> {
     return this.http.delete<boolean>(`${environment.apiUrl}/trophies/${trophyId}`)
     .pipe(map(() => true),
           catchError((err) => of(false))); 

@@ -2,6 +2,7 @@ package com.mpz.EsseEuJaLi.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -43,15 +44,22 @@ public class BookResource {
 		
 		String nameDecoded = URLDecode.decodeParam(name);
 		
-		System.out.println("Resource "+ name);
-		System.out.println("Resource "+ genre);
-		
 		Page<Book> pageObj = bookService.searchBooks(nameDecoded, genre, page, linesPerPage, orderBy, direction);
 		Page<BookDTO> objDTO = pageObj.map(x -> new BookDTO(x));
 		
 		return ResponseEntity.ok(objDTO);
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	@GetMapping("/list")
+	public ResponseEntity<List<BookDTO>> searchBookByName(){
+		
+		List<Book> list = bookService.findAllBooks();
+		List<BookDTO> listDTO = list.stream().map(x -> new BookDTO(x))
+					.collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO );
+	}
+	
 	@GetMapping("/genres")
 	public ResponseEntity<List<String>> genres(){
 		return ResponseEntity.ok(Genre.getDescriptions());
@@ -75,7 +83,7 @@ public class BookResource {
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> removeBook(Long id){
+	public ResponseEntity<Void> removeBook(@PathVariable Long id){
 		bookService.deleteBook(id);
 		return ResponseEntity.noContent().build();
 	}

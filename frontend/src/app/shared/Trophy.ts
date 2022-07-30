@@ -1,5 +1,5 @@
 export default class Trophy{
-    id: number;
+    id?: number;
     name: string;
     genre: string;
 }

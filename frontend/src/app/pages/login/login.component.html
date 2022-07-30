@@ -4,21 +4,25 @@
         <img src="../../../assets/imgs/unnamed.png" alt="Já Li Logo">
     </div>
     <div class="form" fxFlex fxLayoutAlign="center center" fxLayout="column">
-        <p> {{user | json}} </p>
-        <form novalidate #loginForm="ngForm" fxLayout="column" (ngSubmit)="onSubmit()" fxLayoutGap="2rem">
+        <!-- <p> {{user | json}} </p> -->
+        <form novalidate [formGroup]="loginForm" #lForm="ngForm" fxLayout="column" (ngSubmit)="onSubmit()" fxLayoutGap="2rem">
+
             <mat-form-field width="100%">
-                <input matInput type="text" placeholder="Username" [(ngModel)]="user.name" name="username"
-                    #username="ngModel" required>
-                <mat-error *ngIf="username.errors">Username error label</mat-error>
+                <input matInput formControlName="name" type="text" placeholder="Nome" name="name">
+                <mat-error *ngIf="formErrors.name">
+                    {{ formErrors.name }}
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput type="password" placeholder="Password" [(ngModel)]="user.password" name="password"
-                    #password="ngModel" required>
-                <mat-error *ngIf="username.errors">Username error label</mat-error>
+                <input matInput formControlName="password" type="password" placeholder="Senha" name="password">
+                <mat-error *ngIf="formErrors.password">
+                    {{ formErrors.password }}
+                </mat-error>
+
             </mat-form-field>
             <div fxFlex fxLayout="row" fxLayoutAlign="space-around center" class="actions">
-                <button mat-flat-button color="primary" type="submit">Entrar</button>
+                <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid">Entrar</button>
                 <button mat-button color="primary" type="button" (click)="registry()">Registrar-se</button>
             </div>
         </form>

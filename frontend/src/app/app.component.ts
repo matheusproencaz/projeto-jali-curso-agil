@@ -16,7 +16,8 @@ export class AppComponent {
     const svgIcons: string[][] = [
       ['trophy', '../assets/imgs/trophy.svg'],
       ['books', '../assets/imgs/books-stack.svg'],
-      ['plusSolid', '../assets/imgs/plusSolid.svg']
+      ['plusSolid', '../assets/imgs/plusSolid.svg'],
+      ['trash', '../assets/imgs/trash.svg'],
     ];
 
     svgIcons.map(svgInfo => this.addSvg(svgInfo[0], svgInfo[1]));

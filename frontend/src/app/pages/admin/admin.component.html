@@ -1,1 +1,41 @@
-<p>admin works!</p>
+<app-header></app-header>
+
+<div>
+    <div fxFlex fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="center center">
+        <div class="container" fxLayoutGap="1rem" fxLayoutAlign="start center" fxLayout="column"  style="margin-top: 2rem;">
+            <button mat-raised-button color="primary" (click)="addBook()">Adicionar Livro</button>
+            <mat-list class="items" *ngFor="let book of books">
+                <mat-list-item class="items">
+                    <span>#{{book.id}} - {{book.name}}</span>
+
+                    <span class="spacer-full"></span>
+                    
+                    <span class="actions">
+                        <button mat-icon-button>
+                            <mat-icon svgIcon="trash" (click)="deleteBook(book.id!)"></mat-icon>
+                        </button>
+                    </span>
+                </mat-list-item>
+            </mat-list>
+        </div>
+        <div class="container" fxLayoutGap="1rem" fxLayoutAlign="start center" fxLayout="column"  style="margin-top: 2rem;">
+            <button mat-raised-button color="primary" (click)="addTrophy()" >Adicionar Troféu</button>
+            <mat-list class="items" *ngFor="let trophy of trophies">
+                <mat-list-item class="items">
+
+                    <span>#{{trophy.id}} - {{trophy.name}}</span>
+                    
+                    <span class="spacer-full"></span>
+                    
+                    <div class="actions">
+                        <button mat-icon-button>
+                            <mat-icon svgIcon="trash" (click)="deleteTrophy(trophy.id!)"></mat-icon>
+                        </button>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

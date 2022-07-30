@@ -46,6 +46,11 @@ export class BookService {
                     .pipe(catchError(this.erroMsg.handleError));
   }
 
+  getListBooks(): Observable<Book[]>{
+    return this.http.get<Book[]>(`${environment.apiUrl}/books/list`)
+                    .pipe(catchError(this.erroMsg.handleError));
+  }
+
   addBook(idUser: number, idBook: number): Observable<any> {
     return this.http.patch(`${environment.apiUrl}/users/${idUser}/addBook/${idBook}`, null)
                     .pipe(catchError(this.erroMsg.handleError));
