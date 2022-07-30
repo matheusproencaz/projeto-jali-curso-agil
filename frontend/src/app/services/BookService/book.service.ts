@@ -56,6 +56,13 @@ export class BookService {
                     .pipe(catchError(this.erroMsg.handleError));
   }
 
-  
+  addNewBook(newBook: Book){
+    return this.http.post(`${environment.apiUrl}/books`, newBook)
+                    .pipe(catchError(this.erroMsg.handleError));
+  }
 
+  deleteBook(bookId: number){
+    return this.http.delete(`${environment.apiUrl}/books/${bookId}`)
+                    .pipe(catchError(this.erroMsg.handleError));
+  }
 }

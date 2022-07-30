@@ -32,19 +32,6 @@ public class BookResource {
 	@Autowired
 	private BookService bookService;
 	
-//	@GetMapping
-//	public ResponseEntity<Page<BookDTO>> findPageBooks(
-//			@RequestParam(value = "page", defaultValue = "0") Integer page,
-//			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-//			@RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
-//			@RequestParam(value = "direction", defaultValue = "ASC") String direction){
-//		
-//		Page<Book> pageObj = bookService.findAllPageble(page, linesPerPage, orderBy, direction);
-//		Page<BookDTO> objDTO = pageObj.map(x -> new BookDTO(x));
-//		
-//		return ResponseEntity.ok(objDTO);
-//	}
-	
 	@GetMapping
 	public ResponseEntity<Page<BookDTO>> searchBookByName(
 			@RequestParam(value = "name", defaultValue = "") String name,

@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mpz.EsseEuJaLi.model.enums.Genre;
@@ -22,7 +24,11 @@ public class Trophy implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotBlank(message = "Preenchimento Obrigatório")
+	@Size(min = 3, max = 255, message = "O nome do livro deve ter entre 3 a 255 caracteres")
 	private String name;
+	
 	private Integer genre;
 	
 	@JsonIgnore
