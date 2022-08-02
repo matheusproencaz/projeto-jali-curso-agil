@@ -3,6 +3,7 @@ package com.mpz.EsseEuJaLi.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -70,5 +71,22 @@ public class Trophy implements Serializable{
 
 	public void addUser(User user) {
 		this.users.add(user);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(genre, id, name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Trophy other = (Trophy) obj;
+		return Objects.equals(genre, other.genre) && Objects.equals(id, other.id) && Objects.equals(name, other.name);
 	}
 }

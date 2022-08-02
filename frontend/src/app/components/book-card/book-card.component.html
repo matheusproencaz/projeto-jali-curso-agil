@@ -10,12 +10,16 @@
         (error)="noImageFunction()"
     >
     <mat-card-content fxLayoutAlign="space-between">
-        <p *ngIf="overThanOne">
+        <p *ngIf="numberUsers > 1">
             {{_users}} usuários leram esse livro.
         </p>
-        <p *ngIf="!overThanOne">
+        <p *ngIf="numberUsers === 1">
             Um usuário leu esse livro.
         </p>
+        <p *ngIf="numberUsers === 0">
+           Nenhum usuário leu esse livro.
+        </p>
+
         <p>Páginas: {{_pages}}</p>
     </mat-card-content>
     <mat-card-actions fxLayoutAlign="center center">
@@ -23,8 +27,6 @@
             <span>Marcar como Lido</span>
             <mat-icon class="icon">library_add</mat-icon>
         </button>
-
-        
         <button *ngIf="markedBoolean" mat-flat-button color="primary" (click)="onClickRemove()">
             <span>Lido</span>
             <mat-icon class="icon">check</mat-icon>

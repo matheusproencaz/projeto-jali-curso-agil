@@ -1,32 +1,41 @@
-<p>add book works!</p>
-<!-- <mat-toolbar color="primary">
-    Login
-    <span class="flex-spacer"></span>
+<div fxFlex fxLayout="column">
+  <mat-toolbar color="primary">
+    Adicionar Livro
+    <span class="spacer-full"></span>
     <button mat-button mat-dialog-close>&times;</button>
   </mat-toolbar>
 
-  <form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
-      <mat-dialog-content>
-        <p>
-          <mat-form-field>
-            <input matInput placeholder="Username" type="text" [(ngModel)]="user.username" name="username"
-            #username="ngModel" required>
-            <mat-error *ngIf="username.errors?.required">Username is required!</mat-error>
+  <form fxLayoutAlign="center center" fxLayout="column" novalidate #bForm="ngForm" [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+      <mat-dialog-content style="width: 100%;">
+        <p fxLayout="column" style="margin-left: 1.5rem; margin-right: 1.5rem;">
+          <mat-form-field style="margin-top: 1rem;">
+            <input matInput formControlName='name' placeholder="Nome do Livro" type="text" name="username" required>
+            <mat-error *ngIf="formErrors.name">{{formErrors.name}}</mat-error>
           </mat-form-field>
-          <br>
+          
           <mat-form-field>
-            <input matInput placeholder="Password" type="password" [(ngModel)]="user.password" name="password"
-            #password="ngModel" required>
-            <mat-error *ngIf="password.errors?.required">Password is required!</mat-error>
+            <input matInput formControlName='pages' placeholder="Quantas Páginas" type="number" name="pages" required>
+            <mat-error *ngIf="formErrors.pages">{{formErrors.pages}}</mat-error>
           </mat-form-field>
-          <br>
+          
+          <mat-form-field>
+            <mat-label>Gênero</mat-label>
+            <mat-select formControlName="genre">
+              <mat-option>Selecione um gênero</mat-option>
+              <mat-option *ngFor="let genre of genres" [value]="genre">{{genre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+          <mat-form-field>
+            <input matInput formControlName='urlImg' placeholder="URL da Imagem" type="text" name="urlImg">
+          </mat-form-field>
+          
         </p>
       </mat-dialog-content>
       <mat-dialog-actions>
-        <mat-checkbox [(ngModel)]="user.remember" name="remember">Remember Me</mat-checkbox>
         <span class="flex-spacer"></span>
+        <button mat-raised-button type="submit" color="primary" [disabled]="bookForm.invalid">Cadastrar</button>
         <button mat-button mat-dialog-close>Cancel</button>
-        <button mat-button type="submit" class="background-primary text-floral-white" [disabled]="loginForm.form.invalid">Login</button>
       </mat-dialog-actions>
   </form>
-   -->
+</div>

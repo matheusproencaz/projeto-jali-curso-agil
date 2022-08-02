@@ -2,6 +2,7 @@ package com.mpz.EsseEuJaLi.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,7 +23,7 @@ import com.mpz.EsseEuJaLi.model.enums.Role;
 
 @Entity
 @Table(name = "USERS")
-public class User implements Serializable{
+public class User implements Serializable, Comparable<User>{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -122,5 +123,27 @@ public class User implements Serializable{
 
 	public void addRole(Role role) {
 		roles.add(role.getCod());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return Objects.equals(id, other.id);
+	}
+
+	@Override
+	public int compareTo(User o) {
+		return this.getPoints().compareTo(o.getPoints());
 	}
 }

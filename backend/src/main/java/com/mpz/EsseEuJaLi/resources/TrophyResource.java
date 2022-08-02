@@ -46,11 +46,11 @@ public class TrophyResource {
 	@PostMapping
 	public ResponseEntity<Trophy> insertTrophy(@Valid @RequestBody Trophy trophy) {
 		
-		trophyService.insertTrophy(trophy);
+		Trophy trophySend = trophyService.insertTrophy(trophy);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 						.buildAndExpand(trophy.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body(trophySend);
 	}
 
 	@DeleteMapping("/{id}")

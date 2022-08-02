@@ -75,10 +75,10 @@ public class BookResource {
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<Book> insertBook(@Valid @RequestBody Book obj){
-		bookService.insertBook(obj);
+		Book book = bookService.insertBook(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 					.buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body(book);
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")

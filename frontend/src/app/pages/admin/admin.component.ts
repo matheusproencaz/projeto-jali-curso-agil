@@ -1,3 +1,4 @@
+import { DialogRef } from '@angular/cdk/dialog';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddBookComponent } from 'src/app/components/add-book/add-book.component';
@@ -30,6 +31,10 @@ export class AdminComponent implements OnInit {
 
     this.trophyService.getAlltrophies()
         .subscribe((res) => this.trophies = res);
+
+    BookService.output.subscribe((res) => {
+      console.log(res);
+    });
   }
 
   deleteBook(id: number){
@@ -47,12 +52,18 @@ export class AdminComponent implements OnInit {
   }
 
   addBook(){
-    this.dialog.open(AddBookComponent, {width: '500px', height: 'auto'})
-  }
+    const dialogAddBook = this.dialog.open(AddBookComponent, {width: '500px', height: 'auto'})
+    dialogAddBook.afterClosed()
+                 .subscribe((newBook) => {
+                  if(newBook) this.books.push(newBook);
+                 })
+  } 
 
   addTrophy(){
-    this.dialog.open(AddTrophyComponent, {width: '500px', height: 'auto'})
+    const dialogAddTrophy = this.dialog.open(AddTrophyComponent, {width: '500px', height: 'auto'})
+    dialogAddTrophy.afterClosed()
+                   .subscribe((newTrophy) => {
+                    if(newTrophy) this.trophies.push(newTrophy);
+                   })
   }
 }
-
-

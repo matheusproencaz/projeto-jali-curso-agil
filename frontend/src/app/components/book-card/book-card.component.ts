@@ -11,8 +11,8 @@ export class BookCardComponent implements OnInit {
 
   constructor(private bookService: BookService) { }
   
-  overThanOne: boolean;
-  
+  numberUsers: number;
+
   readonly noImage: string = '../../../assets/imgs/unnamed.png';
   
   @Input() _bookId: string;
@@ -28,7 +28,7 @@ export class BookCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.markedBoolean = (this._marked === 'true');
-    this.overThanOne = Number(this._users) > 1;
+    this.numberUsers = Number(this._users);
   }
 
   noImageFunction(){

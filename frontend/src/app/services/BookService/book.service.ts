@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { catchError, Observable } from 'rxjs';
+import { EventEmitter, Injectable, Output } from '@angular/core';
+import { catchError, map, Observable, of } from 'rxjs';
 import Book, { PageBook } from 'src/app/shared/Book';
 import { environment } from 'src/environments/environment';
 import { ExceptionHandlerService } from '../ExceptionHandler/exception-handler.service';
@@ -9,6 +9,9 @@ import { ExceptionHandlerService } from '../ExceptionHandler/exception-handler.s
   providedIn: 'root'
 })
 export class BookService {
+
+  @Output() static output: EventEmitter<any> = new EventEmitter<any>();
+
 
   constructor(
     private http: HttpClient,
@@ -53,21 +56,26 @@ export class BookService {
 
   addBook(idUser: number, idBook: number): Observable<any> {
     return this.http.patch(`${environment.apiUrl}/users/${idUser}/addBook/${idBook}`, null)
-                    .pipe(catchError(this.erroMsg.handleError));
+          .pipe(catchError(this.erroMsg.handleError));
   }
-
+  
   removeBook(idUser: number, idBook: number): Observable<any> {
     return this.http.patch(`${environment.apiUrl}/users/${idUser}/removeBook/${idBook}`, null)
-                    .pipe(catchError(this.erroMsg.handleError));
+    .pipe(catchError(this.erroMsg.handleError));
   }
-
+  
   addNewBook(newBook: Book){
+    BookService.output.emit({newBook});
+    
     return this.http.post(`${environment.apiUrl}/books`, newBook)
                     .pipe(catchError(this.erroMsg.handleError));
   }
 
-  deleteBook(bookId: number){
+  deleteBook(bookId: number): Observable<boolean>{
     return this.http.delete(`${environment.apiUrl}/books/${bookId}`)
-                    .pipe(catchError(this.erroMsg.handleError));
+                    .pipe(
+                      map(() => true),
+                      catchError(err => of(false))
+                    );
   }
 }
